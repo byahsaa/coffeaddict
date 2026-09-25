@@ -102,8 +102,8 @@ p,ul{margin:0}
 .tape--top{top:12px;left:-5%;width:110%;transform:rotate(-1deg)}
 .tape--bot{bottom:14px;left:-5%;width:110%;transform:rotate(1deg)}
 .tape--ceil{top:150px;left:-10%;width:120%;transform:rotate(4deg)}
-.tape.x{display:none}
-@media (min-width:1200px){ .tape.x{display:flex} }
+.tape.dsk{display:none}
+@media (min-width:1200px){ .tape.dsk{display:flex} }
 
 /* ---------- HERO ---------- */
 .hero{background:linear-gradient(var(--ceiling) 0 110px, var(--coal) 300px);padding-block:clamp(250px,30vw,360px) clamp(56px,8vw,110px)}
@@ -121,7 +121,7 @@ p,ul{margin:0}
 @keyframes sway{0%,100%{transform:rotate(-2.5deg)}50%{transform:rotate(2.5deg)}}
 @media (max-width:760px){
   .lamp{transform-origin:50% 0;scale:.62}
-  .lamp.x{display:none}
+  .lamp.dsk{display:none}
   .arches{top:170px}
 }
 .hero__inner{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center}
@@ -240,9 +240,11 @@ p,ul{margin:0}
 .empty{padding:28px 20px;border-radius:20px;background:rgba(239,231,218,.06);color:var(--muted);text-align:center}
 
 /* ---------- ЗАЛ ---------- */
-.sunroom{background:var(--sun);color:var(--ink);padding-block:clamp(64px,9vw,130px)}
+.sunroom{background:var(--sun);color:var(--ink);padding-block:clamp(64px,9vw,130px);isolation:isolate}
 .window{position:absolute;z-index:1;right:-4%;top:6%;width:min(760px,90vw);height:620px;pointer-events:none;transform:skewX(-14deg) rotate(-4deg);animation:sunmove 26s ease-in-out infinite alternate;filter:blur(3px);opacity:.9}
-.window i{position:absolute;background:var(--sun-hi)}
+.window i{position:absolute;background:rgba(255,226,160,.62);mix-blend-mode:screen}
+.sunroom .spill{z-index:0}
+.sunroom .window{z-index:1;opacity:1}
 @keyframes sunmove{from{transform:skewX(-14deg) rotate(-4deg) translateX(0)}to{transform:skewX(-10deg) rotate(-3deg) translateX(-50px)}}
 .sunroom__grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(24px,6vw,80px);align-items:start}
 @media (max-width:900px){.sunroom__grid{grid-template-columns:1fr}}
@@ -422,6 +424,61 @@ fieldset.field{border:0;margin:0;padding:0}
 .adm-del.arm{background:#a3261b;color:#fff}
 .adm-add{min-height:44px;border-radius:12px;border:1px dashed rgba(13,11,10,.35);background:transparent;color:var(--ink);font:700 14px var(--mono);cursor:pointer}
 .adm-err{margin:0;font-size:12px;color:#a3261b}
+
+/* ================= правки после аудита ================= */
+section[id]{scroll-margin-top:var(--hdr)}
+.motto{font-style:normal}
+.today{display:inline-flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:4px 10px;min-height:46px;padding:8px 18px;border-radius:100px;border:1px solid rgba(239,231,218,.2);background:rgba(7,6,5,.72);color:var(--cream);text-decoration:none;font-size:14px;font-weight:600;font-variant-numeric:tabular-nums}
+.today__sep{color:var(--muted)}
+.today__go{color:var(--sun-hi)}
+.mcols{columns:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}
+@media (min-width:1200px){ .mcols{grid-template-columns:repeat(3,minmax(0,1fr))} }
+.mcol{min-width:0}
+.new{margin-left:6px}
+.item__price{display:inline-flex;align-items:center;flex-wrap:wrap;gap:0 2px}
+.plus{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.6px var(--ink);transition:background .15s,color .15s,transform .15s}
+.plus.in{background:var(--ink);color:var(--paper);box-shadow:none}
+@media (hover:hover){ .plus:hover{background:var(--ink);color:var(--paper)} }
+.addon-h{list-style:none;padding:8px 0 2px;border-top:1px dotted rgba(13,11,10,.25);font-size:10.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
+.addon-h + .addon{border-top:0}
+.addon .plus{width:26px;height:26px;font-size:17px!important}
+.line__unit{font-size:12px;color:var(--ink-soft);align-self:center}
+.line .step{grid-column:auto;justify-self:end}
+.contact-row a{display:inline-block;padding-block:8px}
+.owner-link{display:inline-flex;align-items:center;gap:6px;border-color:transparent;color:#8a7f72;font-weight:600;font-size:12px;padding:0 8px;min-height:44px}
+.owner-link svg{width:14px;height:14px}
+.owner-link:hover{color:var(--cream)}
+@media (max-width:900px){
+  .sunroom .head{padding-right:92px}
+  .sunroom .pendant{position:absolute;top:0;right:4px;width:110px;height:300px;z-index:1;pointer-events:none;margin:0}
+  .sunroom .pendant svg{top:-118px;left:0;width:110px;height:352px}
+  .sunroom .pendant .shadow-wrap{transform:translate(-46px,54px) skewX(-18deg)}
+}
+@media (max-width:560px){
+  .decor{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  .decor li{flex-direction:column;text-align:center;gap:6px;padding:10px 6px;font-size:12px;line-height:1.25}
+  .decor svg{width:28px;height:28px}
+}
+@media (max-width:760px){
+  .menu .head .lead{font-size:14px}
+  .hero{padding-bottom:48px}
+  .plus.in .n{top:-6px;right:-6px}
+  .new{margin-left:4px}
+}
+
+/* ---- аудит, часть 2 ---- */
+.search input::-webkit-search-cancel-button{-webkit-appearance:none;appearance:none}
+.searching .mcols{grid-template-columns:1fr}
+.searching .mcol:empty,.searching .mcol:not(:has(.cat:not([hidden]))){display:none}
+.line__sum{justify-self:end}
+.toast{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:min(360px,calc(100% - 32px))}
+@media (max-width:900px){
+  .sunroom .head{padding-right:0}
+  .sunroom .head .eyebrow,.sunroom .head .h2,.sunroom .head .squiggle{margin-right:104px}
+  .sunroom .head .squiggle{max-width:calc(100% - 104px)}
+  .sunroom .pendant{right:14px;width:100px}
+  .sunroom .pendant svg{width:100px;height:320px;top:-150px}
+}
 </style>
 </head>
 <body>
@@ -459,10 +516,8 @@ fieldset.field{border:0;margin:0;padding:0}
 
 <!-- ================= HERO ================= -->
 <section class="band hero" data-spill data-stain="#3a1411" data-rim="#1c0806" data-seed="11">
-  <div class="tape tape--ceil" data-tape></div>
-  <div class="tape tape--bot" data-tape></div>
-  <div class="tape x" data-tape style="left:1.5%;top:-2%;width:1400px;transform:rotate(84deg)"></div>
-  <div class="tape x" data-tape style="left:98.5%;top:-2%;width:1400px;transform:rotate(96deg)"></div>
+  <div class="tape dsk" data-tape style="left:1.5%;top:-2%;width:1400px;transform:rotate(84deg)"></div>
+  <div class="tape dsk" data-tape style="left:98.5%;top:-2%;width:1400px;transform:rotate(96deg)"></div>
   <svg class="neon" viewBox="0 0 1440 220" preserveAspectRatio="none" aria-hidden="true">
     <path class="halo" pathLength="1" d="M-20 70 C80 20 140 150 250 110 C330 80 300 20 380 30 C470 42 430 170 560 150 C660 134 640 40 720 60 C800 80 760 190 860 170 C960 150 900 30 1000 40 C1090 50 1060 150 1150 150 C1240 150 1230 60 1310 70 C1380 78 1400 120 1460 100"/>
     <path pathLength="1" d="M-20 70 C80 20 140 150 250 110 C330 80 300 20 380 30 C470 42 430 170 560 150 C660 134 640 40 720 60 C800 80 760 190 860 170 C960 150 900 30 1000 40 C1090 50 1060 150 1150 150 C1240 150 1230 60 1310 70 C1380 78 1400 120 1460 100"/>
@@ -482,7 +537,7 @@ fieldset.field{border:0;margin:0;padding:0}
     <ellipse cx="80" cy="263" rx="58" ry="10" fill="#0b0908"/>
     <ellipse cx="80" cy="262" rx="30" ry="6" fill="#ffd9a0"/>
   </svg>
-  <svg class="lamp x" style="left:28%" width="100" height="220" viewBox="0 0 100 220" aria-hidden="true">
+  <svg class="lamp dsk" style="left:28%" width="100" height="220" viewBox="0 0 100 220" aria-hidden="true">
     <ellipse class="lamp__glow" cx="50" cy="196" rx="70" ry="24" fill="url(#g1)"/>
     <line x1="50" y1="0" x2="50" y2="130" stroke="#0a0807" stroke-width="2.5"/>
     <path d="M18 172 Q18 132 50 132 Q82 132 82 172 Z" fill="#1e1c1b" stroke="#3d3936" stroke-width="1.5"/>
@@ -498,7 +553,7 @@ fieldset.field{border:0;margin:0;padding:0}
     <ellipse cx="100" cy="215" rx="74" ry="12" fill="#0b0908"/>
     <ellipse cx="100" cy="214" rx="40" ry="7" fill="#ffd9a0"/>
   </svg>
-  <svg class="lamp x" style="right:4%" width="90" height="300" viewBox="0 0 90 300" aria-hidden="true">
+  <svg class="lamp dsk" style="right:4%" width="90" height="300" viewBox="0 0 90 300" aria-hidden="true">
     <ellipse class="lamp__glow" cx="45" cy="280" rx="60" ry="20" fill="url(#g1)"/>
     <line x1="45" y1="0" x2="45" y2="220" stroke="#0a0807" stroke-width="2.5"/>
     <path d="M17 256 Q17 222 45 222 Q73 222 73 256 Z" fill="#1e1c1b" stroke="#3d3936" stroke-width="1.5"/>
@@ -521,11 +576,7 @@ fieldset.field{border:0;margin:0;padding:0}
       <a class="pill pill--solid" href="#menu">Выбрать и заказать →</a>
       <a class="pill" href="https://wa.me/77018359028" target="_blank" rel="noopener">WhatsApp</a>
     </div>
-    <div class="facts">
-      <div class="fact"><small>Сегодня</small><b id="todayHours">—</b></div>
-      <a class="fact" href="#contacts"><small>Адрес</small><b>Улы Дала, 35</b></a>
-      <div class="fact"><small>Заказ</small><b>С собой или в зале</b></div>
-    </div>
+    <a class="today" href="#contacts"><span id="todayHours">Сегодня 08:00–21:00</span><span class="today__sep" aria-hidden="true">·</span><span>Улы Дала, 35</span><span class="today__go" aria-hidden="true">→</span></a>
   </div>
 </section>
 
@@ -536,7 +587,7 @@ fieldset.field{border:0;margin:0;padding:0}
     <div class="head">
       <span class="eyebrow">Меню</span>
       <h2 class="h2">Выберите, что заказать</h2>
-      <p class="lead">Нажмите «+» у позиции, затем «Оформить». Заказ уйдёт бариста в WhatsApp.</p>
+      <p class="lead">Нажмите «+» у позиции, затем «Оформить». Заказ придёт бариста в WhatsApp.</p>
     </div>
     <div class="catbar" id="catbar">
       <div class="catbar__row" id="chipRow">
@@ -557,9 +608,9 @@ fieldset.field{border:0;margin:0;padding:0}
 </section>
 
 <!-- ================= ЗАЛ ================= -->
-<section id="hall" class="band sunroom" data-spill data-stain="#b17d36" data-rim="#8a5d24" data-seed="59">
+<section id="hall" class="band sunroom" data-spill data-stain="#6b3f14" data-rim="#4a2a0b" data-alpha=".42" data-rimw="4" data-seed="59">
   <div class="tape tape--top" data-tape></div>
-  <div class="tape x" data-tape style="left:78%;top:-4%;width:1000px;transform:rotate(70deg)"></div>
+  <div class="tape dsk" data-tape style="left:78%;top:-4%;width:1000px;transform:rotate(70deg)"></div>
   <div class="window" aria-hidden="true" id="win"></div>
   <div class="wrap sunroom__grid">
     <div class="head" style="gap:16px">
@@ -610,7 +661,7 @@ fieldset.field{border:0;margin:0;padding:0}
         <path d="M0 320Q200 288 400 320" fill="none" stroke="#e2dcd1" stroke-width="3"/>
         <path d="M-20 362Q200 332 420 362" fill="none" stroke="#e2dcd1" stroke-width="3"/>
         <ellipse cx="200" cy="394" rx="120" ry="30" fill="#c4463a" opacity=".2"/>
-        <path d="M66 74A190 190 0 0 1 176 20" fill="none" stroke="#ffffff" stroke-width="7" stroke-linecap="round" opacity=".32"/>
+        <path d="M70 72A190 190 0 0 1 170 22" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" opacity=".6"/>
       </svg>
       <div class="mirror__content">
         <svg class="mark" viewBox="0 0 100 100" aria-hidden="true"><use href="#logo"/></svg>
@@ -638,7 +689,7 @@ fieldset.field{border:0;margin:0;padding:0}
 </section>
 
 <div class="marquee" aria-hidden="true"><div class="marquee__track" id="marquee"></div></div>
-<footer class="foot"><div class="wrap"><span>Coffee Addict · Астана, Улы Дала, 35 · Maybe coffee is addicted to you?</span><button type="button" class="owner-link" id="ownerOpen">Режим владельца</button></div></footer>
+<footer class="foot"><div class="wrap"><span>Coffee Addict · Астана, Улы Дала, 35 · Maybe coffee is addicted to you?</span><button type="button" class="owner-link" id="ownerOpen"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 11V8a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>Вход для владельца</button></div></footer>
 
 </main>
 
@@ -748,7 +799,7 @@ fieldset.field{border:0;margin:0;padding:0}
   var ITEMS = {};
   var cols = document.getElementById('menuCols'), cats = document.getElementById('cats');
   var FOOD = { breakfast:1, croissant:1, sandwich:1, bakery:1, syrniki:1 };
-  var NARROW = window.matchMedia('(max-width: 760px)');
+  var NARROW = window.matchMedia('(max-width: 760px)'), WIDE = window.matchMedia('(min-width: 1200px)');
   function labelsFor(it){
     return it.p.map(function(pr, k){
       var label = (it.v && it.v[k]) ? it.v[k] : (it.p.length === 2 ? SIZE2[k] : it.p.length === 3 ? SIZE3[k] : it.p.length > 3 ? 'вариант ' + (k + 1) : '');
@@ -761,22 +812,34 @@ fieldset.field{border:0;margin:0;padding:0}
   }
   function chips(food){ return MENU.filter(function(c){ return !!FOOD[c.id] === food; }).map(function(c){ return '<a href="#cat-' + c.id + '" data-cat="' + c.id + '"><span>' + esc(c.t) + '</span><i hidden></i></a>'; }).join(''); }
   function catHtml(cat){
+    var seenAddon = false;
     return '<section class="cat" id="cat-' + cat.id + '" data-cat="' + cat.id + '"><h4>' + esc(cat.t) + '</h4><svg class="uline" viewBox="0 0 64 8" aria-hidden="true"><path d="M2 5 C16 1 30 8 62 3"/></svg><ul class="items">' +
       cat.items.map(function(it){
         var min = Math.min.apply(null, it.p), multi = it.opts.length > 1;
         var priceTxt = multi && it.p.some(function(x){ return x !== it.p[0]; }) ? '<small>от </small>' + fmt(min) : fmt(min);
-        var sub = (it.v && it.v.length) ? it.v.join(' · ') : (multi ? it.opts.map(function(o){ return o.label; }).join(' · ') : '');
-        return '<li class="item' + (it.add ? ' addon' : '') + (it.off ? ' is-off' : '') + '" data-key="' + it.id + '" data-search="' + esc((it.n + ' ' + (it.v || []).join(' ') + ' ' + cat.t).toLowerCase()) + '">' +
-          '<div class="item__txt"><span class="item__name">' + esc(it.n) + (it.nw ? '<span class="new">NEW</span>' : '') + '</span>' + (sub ? '<span class="item__sub">' + esc(sub) + '</span>' : '') + '</div>' +
-          '<span class="item__dots" aria-hidden="true"></span><span class="item__price">' + priceTxt + '</span><span class="item__ctl"></span></li>';
+        var sub = (it.v && it.v.length) ? it.v.join(' · ') : (multi ? it.opts.length + ' ' + plural(it.opts.length, 'объём', 'объёма', 'объёмов') : '');
+        var addonHead = (it.add && !seenAddon) ? '<li class="addon-h">Добавки</li>' : ''; if (it.add) seenAddon = true;
+        return addonHead + '<li class="item' + (it.add ? ' addon' : '') + (it.off ? ' is-off' : '') + '" data-key="' + it.id + '" data-search="' + esc((it.n + ' ' + (it.v || []).join(' ') + ' ' + cat.t).toLowerCase()) + '">' +
+          '<div class="item__txt"><span class="item__name">' + esc(it.n) + '</span>' + (sub ? '<span class="item__sub">' + esc(sub) + '</span>' : '') + '</div>' +
+          '<span class="item__dots" aria-hidden="true"></span><span class="item__price">' + priceTxt + (it.nw ? '<span class="new">NEW</span>' : '') + '</span><span class="item__ctl"></span></li>';
       }).join('') + '</ul>' +
       (cat.notes ? cat.notes.map(function(n){ return '<p class="cat__note">* ' + esc(n) + '</p>'; }).join('') : '') + '</section>';
   }
   function renderMenu(){
     prep();
     cats.innerHTML = chips(false) + '<span class="sep" aria-hidden="true"></span>' + chips(true);
+    var n = WIDE.matches ? 3 : 2;
     cols.innerHTML = [['Напитки', false], ['Еда', true]].map(function(g){
-      return '<article class="paper"><h3 class="paper__h">' + g[0] + '</h3><div class="mcols">' + MENU.filter(function(c){ return !!FOOD[c.id] === g[1]; }).map(catHtml).join('') + '</div></article>';
+      // раскладываем категории по колонкам так, чтобы колонки были примерно одной высоты
+      var colsH = [], colsHtml = [];
+      for (var k = 0; k < n; k++){ colsH.push(0); colsHtml.push(''); }
+      MENU.filter(function(c){ return !!FOOD[c.id] === g[1]; }).forEach(function(c){
+        var w = 2.2 + (c.notes ? c.notes.length * 1.1 : 0);
+        c.items.forEach(function(it){ w += it.add ? .75 : 1 + (it.n.length > 16 ? .6 : 0) + ((it.v && it.v.length) || it.p.length > 1 ? .4 : 0); });
+        var min = 0; for (var j = 1; j < n; j++) if (colsH[j] < colsH[min] - .01) min = j;
+        colsH[min] += w; colsHtml[min] += catHtml(c);
+      });
+      return '<article class="paper"><h3 class="paper__h">' + g[0] + '</h3><div class="mcols">' + colsHtml.map(function(h){ return '<div class="mcol">' + h + '</div>'; }).join('') + '</div></article>';
     }).join('');
     cart = cart.filter(function(r){ var it = ITEMS[r.key]; return it && !it.off && it.p.indexOf(r.price) > -1; });
     document.getElementById('draftNote').hidden = !usingDraft;
@@ -794,7 +857,7 @@ fieldset.field{border:0;margin:0;padding:0}
     var o = it.opts[idx];
     var r = cart.find(function(x){ return x.key === key && x.label === o.label; });
     if (r) r.q++; else cart.push({ key: key, label: o.label, price: o.price, q: 1 });
-    update(); toast('Добавлено: ' + it.n + (o.label ? ', ' + o.label : ''));
+    update(); toast('В заказе: ' + it.n.replace(/^\+\s*/, '') + (o.label ? ', ' + o.label : ''));
     if (navigator.vibrate) try { navigator.vibrate(12); } catch(e){}
   }
   function removeOne(key){
@@ -807,7 +870,7 @@ fieldset.field{border:0;margin:0;padding:0}
     if (!NARROW.matches && it.opts.length === 1 && q > 0){
       ctl.innerHTML = '<div class="step"><button type="button" data-act="dec" aria-label="Убрать одну: ' + esc(it.n) + '">−</button><output>' + q + '</output><button type="button" data-act="inc" aria-label="Добавить ещё: ' + esc(it.n) + '">+</button></div>';
     } else {
-      ctl.innerHTML = '<button class="plus" type="button" data-act="add" aria-label="Добавить: ' + esc(it.n) + '">+' + (q ? '<span class="n">' + q + '</span>' : '') + '</button>';
+      ctl.innerHTML = '<button class="plus' + (q ? ' in' : '') + '" type="button" data-act="add" aria-label="Добавить: ' + esc(it.n) + (q ? ', в заказе ' + q : '') + '">+' + (q ? '<span class="n">' + q + '</span>' : '') + '</button>';
     }
   }
   function totals(){ var t = 0, n = 0; cart.forEach(function(r){ t += r.price * r.q; n += r.q; }); return { t: t, n: n }; }
@@ -835,7 +898,7 @@ fieldset.field{border:0;margin:0;padding:0}
 
   // ---- выбор варианта
   var pick = document.getElementById('pick'), pickScrim = document.getElementById('pickScrim'), lastFocus = null;
-  function openSheet(sheet, scrim){ lastFocus = document.activeElement; sheet.hidden = false; scrim.hidden = false; document.body.classList.add('locked'); var f = sheet.querySelector('button, a, input, select'); if (f) f.focus(); }
+  function openSheet(sheet, scrim){ toastEl.classList.remove('show'); lastFocus = document.activeElement; sheet.hidden = false; scrim.hidden = false; document.body.classList.add('locked'); var f = sheet.querySelector('button, a, input, select'); if (f) f.focus(); }
   function closeSheet(sheet, scrim){ sheet.hidden = true; scrim.hidden = true; if (pick.hidden && cartEl.hidden) document.body.classList.remove('locked'); update(); if (lastFocus && lastFocus.focus) lastFocus.focus(); }
   function openPick(key){
     var it = ITEMS[key];
@@ -868,7 +931,7 @@ fieldset.field{border:0;margin:0;padding:0}
       box.innerHTML = '<p class="small" style="font-size:15px;padding:12px 0">Корзина пустая. Откройте меню и нажмите «+» у позиции.</p><a class="pill pill--dark pill--wide" href="#menu" data-close-go>Перейти в меню</a>';
     } else {
       box.innerHTML = cart.map(function(r, i){
-        return '<div class="line"><span class="line__name">' + esc(lineName(r)) + '</span><span class="line__sum">' + fmt(r.price * r.q) + '</span>' +
+        return '<div class="line"><span class="line__name">' + esc(lineName(r)) + '</span><span class="line__sum">' + fmt(r.price * r.q) + '</span><span class="line__unit">' + fmt(r.price) + ' за шт.</span>' +
           '<div class="step"><button type="button" data-i="' + i + '" data-d="-1" aria-label="Меньше">−</button><output>' + r.q + '</output><button type="button" data-i="' + i + '" data-d="1" aria-label="Больше">+</button></div></div>';
       }).join('');
     }
@@ -895,7 +958,7 @@ fieldset.field{border:0;margin:0;padding:0}
     else if (a.min < o) txt = 'Закрыто · откроемся в ' + hhmm(o);
     else txt = 'Закрыто · завтра с ' + hhmm(openAt((a.dow + 1) % 7));
     document.getElementById('statusText').innerHTML = txt;
-    document.getElementById('todayHours').textContent = hhmm(o) + '–21:00' + (isOpen ? ' · открыто' : ' · закрыто');
+    document.getElementById('todayHours').textContent = 'Сегодня ' + hhmm(o) + '–21:00';
     return { a: a, o: o, isOpen: isOpen };
   }
   function buildTimes(){
@@ -936,28 +999,41 @@ fieldset.field{border:0;margin:0;padding:0}
   var q = document.getElementById('q'), qClear = document.getElementById('qClear');
   function filter(){
     var v = q.value.trim().toLowerCase(), any = false;
+    cols.classList.toggle('searching', !!v);
     cols.querySelectorAll('.cat').forEach(function(cat){
       var shown = 0;
       cat.querySelectorAll('.item').forEach(function(li){ var ok = !v || li.dataset.search.indexOf(v) > -1; li.hidden = !ok; if (ok) shown++; });
       cat.hidden = !shown; cats.querySelector('[data-cat="' + cat.dataset.cat + '"]').hidden = !shown;
+      var ah = cat.querySelector('.addon-h'); if (ah) ah.hidden = !cat.querySelector('.addon:not([hidden])');
       if (shown) any = true;
     });
     cols.querySelectorAll('.paper').forEach(function(p){ p.hidden = !p.querySelector('.cat:not([hidden])'); });
     document.getElementById('noResults').hidden = any;
     requestAnimationFrame(rebuild);
   }
-  q.addEventListener('input', filter);
+  function toResults(){
+    var off = document.getElementById('hdr').offsetHeight + document.getElementById('catbar').offsetHeight + 8;
+    var top = cols.getBoundingClientRect().top + scrollY - off;
+    if (Math.abs(scrollY - top) > 4) window.scrollTo({ top: top });
+  }
+  q.addEventListener('input', function(){ filter(); requestAnimationFrame(toResults); });
   var chipRow = document.getElementById('chipRow'), searchBox = document.getElementById('searchBox');
   document.getElementById('searchBtn').addEventListener('click', function(){ chipRow.hidden = true; searchBox.hidden = false; q.focus(); rebuild(); });
   qClear.addEventListener('click', function(){ q.value = ''; filter(); searchBox.hidden = true; chipRow.hidden = false; document.getElementById('searchBtn').focus(); rebuild(); });
 
+  var spyLock = 0;
+  cats.addEventListener('click', function(e){ var a = e.target.closest('a[data-cat]'); if (!a) return; spyLock = Date.now() + 900; setChip(a.dataset.cat); });
   function spy(){
-    var line = document.getElementById('catbar').getBoundingClientRect().bottom + 40, cur = null;
-    cols.querySelectorAll('.cat:not([hidden])').forEach(function(c){ var r = c.getBoundingClientRect(); if (r.top <= line && r.bottom > line) cur = c.dataset.cat; });
+    if (Date.now() < spyLock) return;
+    var line = document.getElementById('catbar').getBoundingClientRect().bottom + 40, cur = null, best = -1e9;
+    cols.querySelectorAll('.cat:not([hidden])').forEach(function(c){ var t = c.getBoundingClientRect().top; if (t <= line && t > best){ best = t; cur = c.dataset.cat; } });
     if (!cur) return;
+    setChip(cur);
+  }
+  function setChip(cur){
     cats.querySelectorAll('a').forEach(function(a){
       var on = a.dataset.cat === cur;
-      if (on && !a.classList.contains('on')){ cats.scrollTo({ left: a.offsetLeft - 20, behavior: 'smooth' }); }
+      if (on && !a.classList.contains('on')){ var ar = a.getBoundingClientRect(), cr = cats.getBoundingClientRect(); cats.scrollTo({ left: cats.scrollLeft + ar.left - cr.left - (cr.width - ar.width) / 2, behavior: 'smooth' }); }
       a.classList.toggle('on', on);
     });
   }
@@ -988,7 +1064,7 @@ fieldset.field{border:0;margin:0;padding:0}
   var spills = [].map.call(document.querySelectorAll('[data-spill]'), function(sec){
     var cv = document.createElement('canvas'); cv.className = 'spill'; cv.setAttribute('aria-hidden','true');
     sec.insertBefore(cv, sec.firstChild);
-    return { sec: sec, c: cv, ctx: cv.getContext('2d'), stain: sec.dataset.stain, rim: sec.dataset.rim, seed: +sec.dataset.seed, blobs: [], rings: [], w: 0, h: 0 };
+    return { sec: sec, c: cv, ctx: cv.getContext('2d'), stain: sec.dataset.stain, rim: sec.dataset.rim, alpha: sec.dataset.alpha ? +sec.dataset.alpha : .93, rimw: sec.dataset.rimw ? +sec.dataset.rimw : 2.5, seed: +sec.dataset.seed, blobs: [], rings: [], w: 0, h: 0 };
   });
   function build(s){
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -1027,7 +1103,7 @@ fieldset.field{border:0;margin:0;padding:0}
     s.blobs.forEach(function(b){
       var lp = clamp((p - b.t0) / 0.45, 0, 1); if (!lp) return;
       var e = 1 - Math.pow(1 - lp, 3), rr = b.R * e;
-      ctx.fillStyle = s.stain; ctx.globalAlpha = .93;
+      ctx.fillStyle = s.stain; ctx.globalAlpha = s.alpha;
       if (lp > .25){
         var dl = clamp((lp - .25) / .75, 0, 1);
         b.drips.forEach(function(d){
@@ -1037,7 +1113,7 @@ fieldset.field{border:0;margin:0;padding:0}
         });
       }
       blobPath(ctx, b, rr, p * 1.6); ctx.fill();
-      ctx.globalAlpha = .55; ctx.strokeStyle = s.rim; ctx.lineWidth = 2.5; ctx.stroke();
+      ctx.globalAlpha = s.alpha < .9 ? .5 : .55; ctx.strokeStyle = s.rim; ctx.lineWidth = s.rimw; ctx.stroke();
       if (lp > .45){
         ctx.globalAlpha = .9 * clamp((lp - .45) / .3, 0, 1);
         b.dots.forEach(function(o){ ctx.beginPath(); ctx.arc(b.x + Math.cos(o.a) * b.R * o.d * e, b.y + Math.sin(o.a) * b.R * o.d * e, o.s * e, 0, 6.283); ctx.fill(); });
@@ -1259,6 +1335,8 @@ fieldset.field{border:0;margin:0;padding:0}
     admStatus('Файл index.html скачан. Замените им старый файл на хостинге.');
   });
   document.getElementById('ownerOpen').addEventListener('click', openAdmin);
+  document.querySelectorAll('a[href="#top"]').forEach(function(a){ a.addEventListener('click', function(e){ e.preventDefault(); window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); }); });
+  if (WIDE.addEventListener) WIDE.addEventListener('change', renderMenu); else if (WIDE.addListener) WIDE.addListener(renderMenu);
   document.getElementById('draftReset').addEventListener('click', function(){
     try { localStorage.removeItem(DRAFT_KEY); } catch (e) {}
     MENU = JSON.parse(MENU_SRC); usingDraft = false; renderMenu(); toast('Показано исходное меню');
